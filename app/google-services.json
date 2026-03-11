@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "999238982681",
+    "project_id": "sysarch-e9936",
+    "storage_bucket": "sysarch-e9936.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999238982681:android:5425c21c2a9a54b2e2de88",
+        "android_client_info": {
+          "package_name": "com.example.honeyquest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa7X_j3Vg5bL1CZmZ76SAQGfCNijbdQMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
