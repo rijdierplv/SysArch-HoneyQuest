@@ -13,6 +13,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.database.database
 
 class ProfileActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,26 +27,36 @@ class ProfileActivity : AppCompatActivity() {
         val currentUser = sharedPref.getString("current_user", null)
 
         if (currentUser != null) {
+
+            val emailKey = currentUser.replace(".", "_")
+
             val database = Firebase.database
-            val userRef = database.getReference("users").child(currentUser)
+            val userRef = database.getReference("users").child(emailKey)
 
             userRef.get()
                 .addOnSuccessListener { snapshot ->
+
                     if (snapshot.exists()) {
-                        val username = snapshot.child("username").getValue(String::class.java) ?: currentUser
+
+                        val username = snapshot.child("username")
+                            .getValue(String::class.java) ?: "Unknown User"
+
                         usernameTextView.text = username
+
                     } else {
                         usernameTextView.text = "No user data found"
                     }
                 }
                 .addOnFailureListener {
-                    usernameTextView.text = currentUser
+                    usernameTextView.text = "Failed to load user"
                 }
+
         } else {
             usernameTextView.text = "No user logged in"
         }
 
         logout.setOnClickListener {
+
             val editor = sharedPref.edit()
             editor.remove("current_user")
             editor.apply()
@@ -56,6 +67,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         homeButton.setOnClickListener {
+
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
