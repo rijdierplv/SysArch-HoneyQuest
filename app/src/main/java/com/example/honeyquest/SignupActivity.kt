@@ -44,6 +44,15 @@ class SignupActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (!isValidPassword(password)) {
+                Toast.makeText(
+                    this,
+                    "Password must be at least 8 characters and include a letter, a number, and a special character",
+                    Toast.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
+
             val database = Firebase.database
             val usersRef = database.getReference("users")
 
@@ -77,5 +86,13 @@ class SignupActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        if (password.length < 8) return false
+        val hasLetter = password.any { it.isLetter() }
+        val hasDigit = password.any { it.isDigit() }
+        val hasSpecial = password.any { !it.isLetterOrDigit() }
+        return hasLetter && hasDigit && hasSpecial
     }
 }
