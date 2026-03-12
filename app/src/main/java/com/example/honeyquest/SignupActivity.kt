@@ -10,6 +10,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 
 class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,14 +22,14 @@ class SignupActivity : AppCompatActivity() {
         val passwordInput = findViewById<EditText>(R.id.passwordInput)
         val confirmPasswordInput = findViewById<EditText>(R.id.confirmPasswordInput)
         val signupButton = findViewById<Button>(R.id.signupButton)
-        val backButton= findViewById<ImageButton>(R.id.backButton)
+        val backButton = findViewById<ImageButton>(R.id.backButton)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.signup)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        signupButton.setOnClickListener {
 
+        signupButton.setOnClickListener {
             val username = usernameInput.text.toString().trim()
             val password = passwordInput.text.toString().trim()
             val confirmPassword = confirmPasswordInput.text.toString().trim()
@@ -42,26 +44,38 @@ class SignupActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val sharedPref = getSharedPreferences("HoneyQuestPrefs", MODE_PRIVATE)
+            val database = Firebase.database
+            val usersRef = database.getReference("users")
 
-            // Check if username already exists
-            if (sharedPref.contains("user_$username")) {
-                Toast.makeText(this, "Username already exists", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+            usersRef.child(username).get()
+                .addOnSuccessListener { snapshot ->
+                    if (snapshot.exists()) {
+                        Toast.makeText(this, "Username already exists", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val userData = mapOf(
+                            "username" to username,
+                            "password" to password
+                        )
 
-            // Save new account
-            val editor = sharedPref.edit()
-            editor.putString("user_$username", password)
-            editor.apply()
+                        usersRef.child(username).setValue(userData)
+                            .addOnSuccessListener {
+                                Toast.makeText(this, "Account Created!", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this, LoginActivity::class.java))
+                                finish()
+                            }
+                            .addOnFailureListener {
+                                Toast.makeText(this, "Failed to create account. Please try again.", Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Failed to connect to server. Please try again.", Toast.LENGTH_SHORT).show()
+                }
+        }
 
-            Toast.makeText(this, "Account Created!", Toast.LENGTH_SHORT).show()
-
+        backButton.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
-        backButton.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()        }
     }
 }
