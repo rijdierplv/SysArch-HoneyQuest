@@ -36,6 +36,15 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (!isValidUsername(username)) {
+                Toast.makeText(
+                    this,
+                    "Username must be 3-20 characters and contain only letters, numbers, or underscore (_)",
+                    Toast.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
+
             val database = Firebase.database
             val userRef = database.getReference("users").child(username)
 
@@ -71,5 +80,9 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, SignupActivity::class.java))
             finish()
         }
+    }
+
+    private fun isValidUsername(username: String): Boolean {
+        return username.matches(Regex("^[A-Za-z0-9_]{3,20}$"))
     }
 }

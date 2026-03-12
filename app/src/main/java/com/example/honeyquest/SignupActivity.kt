@@ -39,6 +39,15 @@ class SignupActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (!isValidUsername(username)) {
+                Toast.makeText(
+                    this,
+                    "Username must be 3-20 characters and contain only letters, numbers, or underscore (_)",
+                    Toast.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
+
             if (password != confirmPassword) {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -94,5 +103,9 @@ class SignupActivity : AppCompatActivity() {
         val hasDigit = password.any { it.isDigit() }
         val hasSpecial = password.any { !it.isLetterOrDigit() }
         return hasLetter && hasDigit && hasSpecial
+    }
+
+    private fun isValidUsername(username: String): Boolean {
+        return username.matches(Regex("^[A-Za-z0-9_]{3,20}$"))
     }
 }
