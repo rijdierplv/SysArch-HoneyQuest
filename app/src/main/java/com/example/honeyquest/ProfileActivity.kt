@@ -9,33 +9,58 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 
 class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_profile)
-        val logout=findViewById<Button>(R.id.logoutButton)
+
+        val logout = findViewById<Button>(R.id.logoutButton)
+        val usernameTextView = findViewById<TextView>(R.id.usernameTextView)
+        val homeButton = findViewById<ImageButton>(R.id.btnHome)
+
         val sharedPref = getSharedPreferences("HoneyQuestPrefs", MODE_PRIVATE)
         val currentUser = sharedPref.getString("current_user", null)
 
-        val usernameTextView = findViewById<TextView>(R.id.usernameTextView)
-        val homeButton=findViewById<ImageButton>(R.id.btnHome)
         if (currentUser != null) {
-            val password = sharedPref.getString("user_$currentUser", "N/A")
+            val database = Firebase.database
+            val userRef = database.getReference("users").child(currentUser)
 
-            usernameTextView.text = currentUser
+            userRef.get()
+                .addOnSuccessListener { snapshot ->
+                    if (snapshot.exists()) {
+                        val username = snapshot.child("username").getValue(String::class.java) ?: currentUser
+                        usernameTextView.text = username
+                    } else {
+                        usernameTextView.text = "No user data found"
+                    }
+                }
+                .addOnFailureListener {
+                    usernameTextView.text = currentUser
+                }
         } else {
             usernameTextView.text = "No user logged in"
         }
+
         logout.setOnClickListener {
-            val intent=Intent(this, LoginActivity::class.java)
+            val editor = sharedPref.edit()
+            editor.remove("current_user")
+            editor.apply()
+
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
+
         homeButton.setOnClickListener {
-            val intent=Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
+            finish()
         }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.profile)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
