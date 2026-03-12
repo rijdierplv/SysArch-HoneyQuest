@@ -14,16 +14,19 @@ import com.google.firebase.Firebase
 import com.google.firebase.database.database
 
 class SignupActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_signup)
-        val emailInput=findViewById<EditText>(R.id.emailInput)
+
+        val emailInput = findViewById<EditText>(R.id.emailInput)
         val usernameInput = findViewById<EditText>(R.id.userInput)
         val passwordInput = findViewById<EditText>(R.id.passwordInput)
         val confirmPasswordInput = findViewById<EditText>(R.id.confirmPassInput)
         val signupButton = findViewById<Button>(R.id.signupButton)
         val backButton = findViewById<ImageButton>(R.id.backButton)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.signup)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -31,12 +34,13 @@ class SignupActivity : AppCompatActivity() {
         }
 
         signupButton.setOnClickListener {
-            val email=emailInput.text.toString().trim()
+
+            val email = emailInput.text.toString().trim()
             val username = usernameInput.text.toString().trim()
             val password = passwordInput.text.toString().trim()
             val confirmPassword = confirmPasswordInput.text.toString().trim()
 
-            if (email.isEmpty() ||username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            if (email.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -58,7 +62,7 @@ class SignupActivity : AppCompatActivity() {
             if (!isValidPassword(password)) {
                 Toast.makeText(
                     this,
-                    "Password must be at least 8 characters and include a letter, a number, and a special character",
+                    "Password must be at least 8 characters and include a letter, number, and special character",
                     Toast.LENGTH_LONG
                 ).show()
                 return@setOnClickListener
@@ -67,29 +71,33 @@ class SignupActivity : AppCompatActivity() {
             val database = Firebase.database
             val usersRef = database.getReference("users")
 
-            usersRef.child(username).get()
+            val emailKey = email.replace(".", "_")
+
+            usersRef.child(emailKey).get()
                 .addOnSuccessListener { snapshot ->
+
                     if (snapshot.exists()) {
-                        Toast.makeText(this, "Username already exists", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Email already registered", Toast.LENGTH_SHORT).show()
                     } else {
+
                         val userData = mapOf(
+                            "email" to email,
                             "username" to username,
                             "password" to password
                         )
 
-                        usersRef.child(username).setValue(userData)
+                        usersRef.child(emailKey).setValue(userData)
                             .addOnSuccessListener {
+
                                 Toast.makeText(this, "Account Created!", Toast.LENGTH_SHORT).show()
+
                                 startActivity(Intent(this, LoginActivity::class.java))
                                 finish()
                             }
                             .addOnFailureListener {
-                                Toast.makeText(this, "Failed to create account. Please try again.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Failed to create account", Toast.LENGTH_SHORT).show()
                             }
                     }
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Failed to connect to server. Please try again.", Toast.LENGTH_SHORT).show()
                 }
         }
 
