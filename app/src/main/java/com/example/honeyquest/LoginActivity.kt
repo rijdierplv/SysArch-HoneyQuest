@@ -16,10 +16,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val usernameInput = findViewById<EditText>(R.id.userInput)
+        val emailInput = findViewById<EditText>(R.id.EmailInput)
         val passwordInput = findViewById<EditText>(R.id.passwordInput)
         val loginButton = findViewById<Button>(R.id.loginButton)
         val registerButton = findViewById<Button>(R.id.registerButton)
+        val forgotPasswordButton = findViewById<Button>(R.id.forgotPasswordButton)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.login)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -28,15 +29,15 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginButton.setOnClickListener {
-            val username = usernameInput.text.toString().trim()
+            val email = emailInput.text.toString().trim()
             val password = passwordInput.text.toString().trim()
 
-            if (username.isEmpty() || password.isEmpty()) {
+            if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Please enter username and password", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (!isValidUsername(username)) {
+            if (!isValidUsername(email)) {
                 Toast.makeText(
                     this,
                     "Username must be 3-20 characters and contain only letters, numbers, or underscore (_)",
@@ -46,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             val database = Firebase.database
-            val userRef = database.getReference("users").child(username)
+            val userRef = database.getReference("users").child(email)
 
             userRef.get()
                 .addOnSuccessListener { snapshot ->
@@ -62,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
 
                         val sharedPref = getSharedPreferences("HoneyQuestPrefs", MODE_PRIVATE)
                         val editor = sharedPref.edit()
-                        editor.putString("current_user", username)
+                        editor.putString("current_user", email)
                         editor.apply()
 
                         startActivity(Intent(this, HomeActivity::class.java))
@@ -78,6 +79,11 @@ class LoginActivity : AppCompatActivity() {
 
         registerButton.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
+            finish()
+        }
+
+        forgotPasswordButton.setOnClickListener {
+            startActivity(Intent(this, ForgotPassActivity::class.java))
             finish()
         }
     }

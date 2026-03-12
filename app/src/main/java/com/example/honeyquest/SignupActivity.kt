@@ -18,9 +18,10 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_signup)
+        val emailInput=findViewById<EditText>(R.id.emailInput)
         val usernameInput = findViewById<EditText>(R.id.userInput)
         val passwordInput = findViewById<EditText>(R.id.passwordInput)
-        val confirmPasswordInput = findViewById<EditText>(R.id.confirmPasswordInput)
+        val confirmPasswordInput = findViewById<EditText>(R.id.confirmPassInput)
         val signupButton = findViewById<Button>(R.id.signupButton)
         val backButton = findViewById<ImageButton>(R.id.backButton)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.signup)) { v, insets ->
@@ -30,11 +31,12 @@ class SignupActivity : AppCompatActivity() {
         }
 
         signupButton.setOnClickListener {
+            val email=emailInput.text.toString().trim()
             val username = usernameInput.text.toString().trim()
             val password = passwordInput.text.toString().trim()
             val confirmPassword = confirmPasswordInput.text.toString().trim()
 
-            if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            if (email.isEmpty() ||username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
