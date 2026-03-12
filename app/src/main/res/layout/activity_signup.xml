@@ -81,38 +81,54 @@
         app:layout_constraintVertical_bias="0.238" />
 
     <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="277dp"
+        android:layout_height="46dp"
+        android:background="@drawable/inputdesign"
+        android:hint="Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        android:paddingLeft="20dp"
+        android:inputType="textEmailAddress"
+        />
+
+    <EditText
         android:id="@+id/userInput"
         android:layout_width="277dp"
         android:layout_height="46dp"
         android:background="@drawable/inputdesign"
         android:hint="Username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/emailInput"
+        app:layout_constraintStart_toStartOf="@+id/emailInput"
+        app:layout_constraintTop_toBottomOf="@+id/emailInput"
+        android:layout_marginTop="10dp"
         android:paddingLeft="20dp"/>
 
     <EditText
         android:id="@+id/passwordInput"
         android:layout_width="277dp"
         android:layout_height="46dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/inputdesign"
         android:hint="Password"
+        android:paddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="@+id/userInput"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@+id/userInput"
         app:layout_constraintTop_toBottomOf="@+id/userInput"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="20dp"/>
+        android:inputType="textPassword"/>
 
     <EditText
-        android:id="@+id/confirmPasswordInput"
+        android:id="@+id/confirmPassInput"
         android:layout_width="277dp"
         android:layout_height="46dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/inputdesign"
         android:hint="Confirm Password"
+        android:inputType="textPassword"
         android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/passwordInput"
-        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@+id/passwordInput"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
 
@@ -120,15 +136,16 @@
         android:id="@+id/signupButton"
         android:layout_width="116dp"
         android:layout_height="46dp"
+        android:layout_marginBottom="76dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/poppins_bold"
         android:text="Sign up"
         android:textColor="#FFC300"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/confirmPasswordInput"
-        app:layout_constraintStart_toStartOf="@+id/confirmPasswordInput"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordInput"
-        app:layout_constraintVertical_bias="0.206" />
+        app:layout_constraintEnd_toEndOf="@+id/confirmPassInput"
+        app:layout_constraintStart_toStartOf="@+id/confirmPassInput"
+        app:layout_constraintTop_toBottomOf="@+id/confirmPassInput"
+        app:layout_constraintVertical_bias="0.68" />
 
     <ImageButton
         android:id="@+id/backButton"
