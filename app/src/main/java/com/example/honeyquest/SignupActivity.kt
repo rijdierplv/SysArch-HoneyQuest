@@ -20,8 +20,8 @@ class SignupActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_signup)
 
+        val usernameInput = findViewById<EditText>(R.id.usernameInput)
         val emailInput = findViewById<EditText>(R.id.emailInput)
-        val usernameInput = findViewById<EditText>(R.id.userInput)
         val passwordInput = findViewById<EditText>(R.id.passwordInput)
         val confirmPasswordInput = findViewById<EditText>(R.id.confirmPassInput)
         val signupButton = findViewById<Button>(R.id.signupButton)
@@ -32,7 +32,6 @@ class SignupActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         signupButton.setOnClickListener {
 
             val email = emailInput.text.toString().trim()
@@ -54,6 +53,11 @@ class SignupActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             if (password != confirmPassword) {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -62,7 +66,7 @@ class SignupActivity : AppCompatActivity() {
             if (!isValidPassword(password)) {
                 Toast.makeText(
                     this,
-                    "Password must be at least 8 characters and include a letter, number, and special character",
+                    "Password must be 8-20 characters, include a letter, number, special character, and no spaces",
                     Toast.LENGTH_LONG
                 ).show()
                 return@setOnClickListener
@@ -70,34 +74,42 @@ class SignupActivity : AppCompatActivity() {
 
             val database = Firebase.database
             val usersRef = database.getReference("users")
-
             val emailKey = email.replace(".", "_")
 
             usersRef.child(emailKey).get()
-                .addOnSuccessListener { snapshot ->
-
-                    if (snapshot.exists()) {
+                .addOnSuccessListener { emailSnapshot ->
+                    if (emailSnapshot.exists()) {
                         Toast.makeText(this, "Email already registered", Toast.LENGTH_SHORT).show()
                     } else {
+                        usersRef.orderByChild("username").equalTo(username).get()
+                            .addOnSuccessListener { usernameSnapshot ->
+                                if (usernameSnapshot.exists()) {
+                                    Toast.makeText(this, "Username already taken", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    val userData = mapOf(
+                                        "email" to email,
+                                        "username" to username,
+                                        "password" to password
+                                    )
 
-                        val userData = mapOf(
-                            "email" to email,
-                            "username" to username,
-                            "password" to password
-                        )
-
-                        usersRef.child(emailKey).setValue(userData)
-                            .addOnSuccessListener {
-
-                                Toast.makeText(this, "Account Created!", Toast.LENGTH_SHORT).show()
-
-                                startActivity(Intent(this, LoginActivity::class.java))
-                                finish()
+                                    usersRef.child(emailKey).setValue(userData)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(this, "Account Created!", Toast.LENGTH_SHORT).show()
+                                            startActivity(Intent(this, LoginActivity::class.java))
+                                            finish()
+                                        }
+                                        .addOnFailureListener {
+                                            Toast.makeText(this, "Failed to create account", Toast.LENGTH_SHORT).show()
+                                        }
+                                }
                             }
                             .addOnFailureListener {
-                                Toast.makeText(this, "Failed to create account", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Error checking username", Toast.LENGTH_SHORT).show()
                             }
                     }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Error checking email", Toast.LENGTH_SHORT).show()
                 }
         }
 
@@ -109,6 +121,8 @@ class SignupActivity : AppCompatActivity() {
 
     private fun isValidPassword(password: String): Boolean {
         if (password.length < 8) return false
+        if (password.length > 20) return false
+        if (password.contains(" ")) return false
         val hasLetter = password.any { it.isLetter() }
         val hasDigit = password.any { it.isDigit() }
         val hasSpecial = password.any { !it.isLetterOrDigit() }
