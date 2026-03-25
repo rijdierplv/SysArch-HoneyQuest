@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/forgot"
+    android:id="@+id/forgotPass"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFC300"
@@ -64,53 +64,99 @@
         app:layout_constraintStart_toStartOf="@+id/imageView1"
         app:layout_constraintTop_toBottomOf="@+id/imageView1"
         app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Change Password"
+        android:text="Forgot Password"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:layout_constraintVertical_bias="0.238" />
-    <EditText
-        android:id="@+id/userInput"
+
+    <TextView
+        android:id="@+id/textView5"
         android:layout_width="277dp"
-        android:layout_height="46dp"
-        android:background="@drawable/inputdesign"
-        android:hint="Username"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Enter your registered email and new password below."
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        android:paddingLeft="20dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
     <EditText
-        android:id="@+id/NewPassInput"
+        android:id="@+id/emailInput"
         android:layout_width="277dp"
         android:layout_height="46dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/inputdesign"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <EditText
+        android:id="@+id/newPasswordInput"
+        android:layout_width="277dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/inputdesign"
         android:hint="New Password"
-        app:layout_constraintEnd_toEndOf="@+id/userInput"
-        app:layout_constraintStart_toStartOf="@+id/userInput"
-        app:layout_constraintTop_toBottomOf="@+id/userInput"
+        android:inputType="textPassword"
+        android:paddingLeft="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/emailInput"
+        app:layout_constraintStart_toStartOf="@+id/emailInput"
+        app:layout_constraintTop_toBottomOf="@+id/emailInput" />
+
+    <EditText
+        android:id="@+id/confirmNewPasswordInput"
+        android:layout_width="277dp"
+        android:layout_height="46dp"
         android:layout_marginTop="10dp"
-        android:paddingLeft="20dp"/>
+        android:background="@drawable/inputdesign"
+        android:hint="Confirm New Password"
+        android:inputType="textPassword"
+        android:paddingLeft="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/newPasswordInput"
+        app:layout_constraintStart_toStartOf="@+id/newPasswordInput"
+        app:layout_constraintTop_toBottomOf="@+id/newPasswordInput" />
 
     <Button
-        android:id="@+id/changePassButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/resetPasswordButton"
+        android:layout_width="116dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="76dp"
         android:backgroundTint="@color/white"
-        android:text="Change"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Reset"
         android:textColor="#FFC300"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/NewPassInput"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toStartOf="@+id/NewPassInput"
-        app:layout_constraintTop_toBottomOf="@+id/NewPassInput"
-        app:layout_constraintVertical_bias="0.124" />
+        app:layout_constraintEnd_toEndOf="@+id/confirmNewPasswordInput"
+        app:layout_constraintStart_toStartOf="@+id/confirmNewPasswordInput"
+        app:layout_constraintTop_toBottomOf="@+id/confirmNewPasswordInput"
+        app:layout_constraintVertical_bias="0.68" />
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/img_10"
+        app:layout_constraintBottom_toTopOf="@+id/textView1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
