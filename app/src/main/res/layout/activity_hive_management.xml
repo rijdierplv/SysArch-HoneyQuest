@@ -98,19 +98,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/merienda_one"
-            android:text="No "
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="@id/hivesText"
             app:layout_constraintTop_toBottomOf="@id/hivesText" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="hives registered"
-            android:textSize="13sp"
-            android:fontFamily="@font/merienda_one"
-            app:layout_constraintStart_toEndOf="@id/hivesNumber"
-            app:layout_constraintTop_toTopOf="@id/hivesNumber"/>
 
 
         <ScrollView

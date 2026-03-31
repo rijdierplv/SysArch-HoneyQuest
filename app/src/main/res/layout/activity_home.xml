@@ -9,54 +9,60 @@
     tools:context=".HomeActivity">
 
 
+
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="38dp"
         android:layout_height="38dp"
         android:background="@drawable/img"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.039" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
-        android:text="Welcome to"
+        android:text="Welcome"
+        android:layout_marginStart="2dp"
+        android:includeFontPadding="false"
         android:textColor="@color/black"
         android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.027"
-        app:layout_constraintStart_toEndOf="@+id/imageView1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintTop_toTopOf="@id/imageView1"
+        app:layout_constraintStart_toEndOf="@id/imageView1"/>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/mochiy_pop_one"
-        android:text="HoneyQuest"
+        android:text="Bee Keepers"
+        android:layout_marginTop="-10dp"
+        android:includeFontPadding="false"
         android:textColor="@color/black"
         android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/textView1"
+        app:layout_constraintTop_toBottomOf="@id/textView1"/>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/notif"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.231"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="0dp"
         android:background="#FFE770"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -89,6 +95,7 @@
             android:src="@drawable/img_1" />
 
         <ImageButton
+            android:id="@+id/hivesBtn"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginLeft="30dp"
