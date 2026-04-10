@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/m_plus_1p_bold</item>
+        <item>@font/markazi_text</item>
+        <item>@font/merienda_one</item>
         <item>@font/mochiy_pop_one</item>
         <item>@font/poppins_bold</item>
         <item>@font/poppins_semibold</item>

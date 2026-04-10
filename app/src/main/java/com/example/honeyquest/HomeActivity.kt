@@ -19,8 +19,14 @@ class HomeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val hivesBtn = findViewById<ImageButton>(R.id.hivesBtn)
         prof.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
+            finish()
+        }
+
+        hivesBtn.setOnClickListener {
+            startActivity(Intent(this, HiveManagement::class.java))
             finish()
         }
     }
