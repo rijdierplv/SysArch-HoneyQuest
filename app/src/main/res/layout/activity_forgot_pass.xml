@@ -100,37 +100,79 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/inputdesign"
         android:hint="Email"
+        android:textColor="@color/black"
         android:inputType="textEmailAddress"
         android:paddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-    <EditText
-        android:id="@+id/newPasswordInput"
-        android:layout_width="277dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/inputdesign"
-        android:hint="New Password"
-        android:inputType="textPassword"
-        android:paddingLeft="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/emailInput"
-        app:layout_constraintStart_toStartOf="@+id/emailInput"
-        app:layout_constraintTop_toBottomOf="@+id/emailInput" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/newPasswordContainer"
+    android:layout_width="277dp"
+    android:layout_height="46dp"
+    android:layout_marginTop="10dp"
+    app:layout_constraintEnd_toEndOf="@+id/emailInput"
+    app:layout_constraintStart_toStartOf="@+id/emailInput"
+    app:layout_constraintTop_toBottomOf="@+id/emailInput">
 
     <EditText
-        android:id="@+id/confirmNewPasswordInput"
+        android:id="@+id/newPasswordInput"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/inputdesign"
+        android:hint="New Password"
+        android:textColor="@color/black"
+        android:inputType="textPassword"
+        android:paddingLeft="20dp"
+        android:paddingRight="45dp" />
+
+    <ImageButton
+        android:id="@+id/toggleNewPassBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Toggle new password visibility"
+        android:padding="8dp"
+        android:src="@drawable/eye_closed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/confirmNewPassContainer"
         android:layout_width="277dp"
         android:layout_height="46dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/inputdesign"
-        android:hint="Confirm New Password"
-        android:inputType="textPassword"
-        android:paddingLeft="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/newPasswordInput"
-        app:layout_constraintStart_toStartOf="@+id/newPasswordInput"
-        app:layout_constraintTop_toBottomOf="@+id/newPasswordInput" />
+        app:layout_constraintEnd_toEndOf="@+id/newPasswordContainer"
+        app:layout_constraintStart_toStartOf="@+id/newPasswordContainer"
+        app:layout_constraintTop_toBottomOf="@+id/newPasswordContainer">
+
+        <EditText
+            android:id="@+id/confirmNewPasswordInput"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/inputdesign"
+            android:hint="Confirm New Password"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
+            android:paddingLeft="20dp"
+            android:paddingRight="45dp" />
+
+        <ImageButton
+            android:id="@+id/toggleConfirmNewPassBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Toggle confirm new password visibility"
+            android:padding="8dp"
+            android:src="@drawable/eye_closed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/resetPasswordButton"
@@ -142,9 +184,9 @@
         android:text="Reset"
         android:textColor="#FFC300"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/confirmNewPasswordInput"
-        app:layout_constraintStart_toStartOf="@+id/confirmNewPasswordInput"
-        app:layout_constraintTop_toBottomOf="@+id/confirmNewPasswordInput"
+        app:layout_constraintEnd_toEndOf="@id/confirmNewPassContainer"
+        app:layout_constraintStart_toStartOf="@+id/confirmNewPassContainer"
+        app:layout_constraintTop_toBottomOf="@+id/confirmNewPassContainer"
         app:layout_constraintVertical_bias="0.68" />
 
     <ImageButton
