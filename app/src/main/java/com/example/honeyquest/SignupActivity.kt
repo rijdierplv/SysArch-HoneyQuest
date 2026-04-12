@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
+import android.text.InputType
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,7 +15,8 @@ import com.google.firebase.Firebase
 import com.google.firebase.database.database
 
 class SignupActivity : AppCompatActivity() {
-
+    private var isPasswordVisible = false
+    private var isConfirmPassVisible = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,11 +28,41 @@ class SignupActivity : AppCompatActivity() {
         val confirmPasswordInput = findViewById<EditText>(R.id.confirmPassInput)
         val signupButton = findViewById<Button>(R.id.signupButton)
         val backButton = findViewById<ImageButton>(R.id.backButton)
+        val togglePasswordBtn = findViewById<ImageButton>(R.id.togglePasswordBtn)
+        val toggleConfirmPassBtn = findViewById<ImageButton>(R.id.toggleConfirmPassBtn)
+        val loginRedirectButton = findViewById<Button>(R.id.loginRedirectButton)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.signup)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        togglePasswordBtn.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+
+            if (isPasswordVisible) {
+                passwordInput.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                togglePasswordBtn.setImageResource(R.drawable.eye_open)
+            } else {
+                passwordInput.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                togglePasswordBtn.setImageResource(R.drawable.eye_closed)
+            }
+
+            passwordInput.setSelection(passwordInput.text.length)
+        }
+
+        toggleConfirmPassBtn.setOnClickListener {
+            isConfirmPassVisible = !isConfirmPassVisible
+
+            if (isConfirmPassVisible) {
+                confirmPasswordInput.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                toggleConfirmPassBtn.setImageResource(R.drawable.eye_open)
+            } else {
+                confirmPasswordInput.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                toggleConfirmPassBtn.setImageResource(R.drawable.eye_closed)
+            }
+
+            confirmPasswordInput.setSelection(confirmPasswordInput.text.length)
         }
         signupButton.setOnClickListener {
 
@@ -114,6 +146,10 @@ class SignupActivity : AppCompatActivity() {
         }
 
         backButton.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+        loginRedirectButton.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
