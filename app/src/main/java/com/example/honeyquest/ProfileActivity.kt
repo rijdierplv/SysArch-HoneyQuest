@@ -19,6 +19,9 @@ class ProfileActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_profile)
 
+        val accountSecurityButton=findViewById<Button>(R.id.accountSecurityButton)
+        val accountInfoButton=findViewById<Button>(R.id.accountInfoButton)
+        val editProfileTextView=findViewById<TextView>(R.id.editProfileTextView)
         val logout = findViewById<Button>(R.id.logoutButton)
         val usernameTextView = findViewById<TextView>(R.id.usernameTextView)
         val homeButton = findViewById<ImageButton>(R.id.btnHome)
@@ -72,7 +75,21 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
+        editProfileTextView.setOnClickListener {
+            val intent = Intent(this, EditProfileActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        accountInfoButton.setOnClickListener {
+            val intent = Intent(this, AccountInformationActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        accountSecurityButton.setOnClickListener {
+            val intent = Intent(this, AccountSecurityActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.profile)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
