@@ -12,10 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HoneyQuest"
         tools:targetApi="31">
-
+        <activity
+            android:name=".InspectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AccountSecurityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AccountInformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".HiveManagement"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
@@ -45,4 +56,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
 </manifest>

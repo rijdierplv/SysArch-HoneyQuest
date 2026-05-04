@@ -4,17 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="12dp"
     app:cardBackgroundColor="#FFFDF0"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="18dp"
+    app:cardElevation="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="14dp">
+        android:padding="16dp">
 
+        <!-- ── Header Row: Icon + Name/Code + Status Badge ── -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,8 +23,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/bg_hive_icon"
                 android:contentDescription="Hive icon"
@@ -63,21 +64,24 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_status_badge"
                 android:paddingStart="10dp"
-                android:paddingTop="4dp"
+                android:paddingTop="5dp"
                 android:paddingEnd="10dp"
-                android:paddingBottom="4dp"
+                android:paddingBottom="5dp"
                 android:text="Healthy"
                 android:textColor="#FFFFFF"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
+        <!-- ── Divider ── -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:background="#F0E0A0" />
 
+        <!-- ── Info Row: Location / Harvest Date / Last Inspection ── -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,7 +96,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Location"
+                    android:text="📍 Location"
                     android:textColor="#AAAAAA"
                     android:textSize="10sp" />
 
@@ -115,7 +119,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Harvest Date"
+                    android:text="📅 Harvest Date"
                     android:textColor="#AAAAAA"
                     android:textSize="10sp" />
 
@@ -138,7 +142,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Last Inspection"
+                    android:text="🔍 Last Inspection"
                     android:textColor="#AAAAAA"
                     android:textSize="10sp" />
 
@@ -153,6 +157,7 @@
             </LinearLayout>
         </LinearLayout>
 
+        <!-- ── Divider ── -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -160,6 +165,41 @@
             android:layout_marginBottom="10dp"
             android:background="#F0E0A0" />
 
+        <!-- ── Frames Row ── -->
+        <TextView
+            android:id="@+id/tvFrameCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🪟 Frames: 0"
+            android:textColor="#5B3600"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:layout_marginBottom="6dp" />
+
+        <!-- ── Honey Production Row ── -->
+        <TextView
+            android:id="@+id/tvHoneyInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🍯 No honey data set"
+            android:textColor="#5B3600"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:background="#FFF3B0"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- ── Divider ── -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="#F0E0A0" />
+
+        <!-- ── Action Buttons ── -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -170,18 +210,28 @@
                 android:id="@+id/btnEditHive"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
                 android:layout_marginEnd="8dp"
-                android:text="Edit"
-                android:textColor="#2D2D2D" />
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="✏️ Edit"
+                android:textColor="#2D2D2D"
+                android:textSize="12sp"
+                app:strokeColor="#CCCCCC"
+                app:cornerRadius="10dp" />
 
             <Button
                 android:id="@+id/btnDeleteHive"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete"
-                android:textColor="#B00020" />
+                android:layout_height="36dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="🗑 Delete"
+                android:textColor="#B00020"
+                android:textSize="12sp"
+                app:strokeColor="#B00020"
+                app:cornerRadius="10dp" />
         </LinearLayout>
 
     </LinearLayout>
