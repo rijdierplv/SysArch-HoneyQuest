@@ -1,225 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFE770">
+    android:background="#FFF8DC"
+    android:padding="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:orientation="vertical">
 
-        <View
-            android:layout_width="40dp"
-            android:layout_height="4dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="14dp"
-            android:background="#FFC300" />
-
+        <!-- Title -->
         <TextView
             android:id="@+id/tvDialogTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="18dp"
-            android:fontFamily="@font/m_plus_1p_bold"
             android:text="Add New Hive"
-            android:textColor="#2D2D2D"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/merienda_one"
-            android:text="Hive Name *"
-            android:textColor="#555555"
-            android:textSize="12sp" />
-
+        <!-- Hive Name -->
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutHiveName"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="* Hive Name"
             android:layout_marginBottom="12dp"
-            app:boxBackgroundColor="#FFFDF0"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
             app:boxCornerRadiusTopStart="12dp"
-            app:boxStrokeColor="#FFC300">
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etHiveName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/merienda_one"
-                android:hint="e.g. Hive Alpha"
-                android:inputType="textCapWords" />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/merienda_one"
-            android:text="Hive Code *"
-            android:textColor="#555555"
-            android:textSize="12sp" />
-
+        <!-- Hive Code -->
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutHiveCode"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="* Hive Code"
             android:layout_marginBottom="12dp"
-            app:boxBackgroundColor="#FFFDF0"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
             app:boxCornerRadiusTopStart="12dp"
-            app:boxStrokeColor="#FFC300">
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etHiveCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/merienda_one"
-                android:hint="e.g. H-005"
-                android:inputType="textCapCharacters" />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Hive Type Spinner -->
         <TextView
+            android:id="@+id/labelHiveType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/merienda_one"
             android:text="Hive Type"
-            android:textColor="#555555"
-            android:textSize="12sp" />
+            android:textSize="13sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="4dp" />
 
         <Spinner
             android:id="@+id/spinnerHiveType"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/bg_spinner"
+            android:background="@drawable/inputdesign"
             android:paddingStart="12dp"
-            android:paddingEnd="12dp" />
+            android:layout_marginBottom="12dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/merienda_one"
-            android:text="Location *"
-            android:textColor="#555555"
-            android:textSize="12sp" />
-
+        <!-- Location -->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="* Location"
             android:layout_marginBottom="12dp"
-            app:boxBackgroundColor="#FFFDF0"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
             app:boxCornerRadiusTopStart="12dp"
-            app:boxStrokeColor="#FFC300">
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/merienda_one"
-                android:hint="e.g. Garden East"
-                android:inputType="textCapWords" />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- ── Frames Section ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/merienda_one"
-            android:text="Harvest Date"
-            android:textColor="#555555"
-            android:textSize="12sp" />
+            android:text="🪟 Bee Frames"
+            android:textSize="15sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/black"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" />
 
-        <Button
-            android:id="@+id/btnHarvestDate"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        <!-- Frame Count -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Number of Frames"
+            android:layout_marginBottom="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFrameCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- ── Honey Production Section ── -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍯 Honey Production"
+            android:textSize="15sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/black"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Honey per Frame -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Honey per Frame (kg)"
+            android:layout_marginBottom="8dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etHoneyPerFrame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Live Honey Calculation Display -->
+        <TextView
+            android:id="@+id/tvHoneyCalculation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="13sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="#5B3600"
+            android:background="#FFE566"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="visible" />
+
+        <!-- ── Harvest Method ── -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Harvest Method"
+            android:textSize="13sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="4dp" />
+        <Spinner
+            android:id="@+id/spinnerHarvestMethod"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="12dp"
-            android:backgroundTint="#FFFDF0"
-            android:text="Select harvest date"
-            android:textColor="#888888" />
+            android:background="@drawable/inputdesign"
+            android:paddingStart="12dp" />
 
+        <!-- ── Status ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/merienda_one"
-            android:text="Last Inspection"
-            android:textColor="#555555"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/btnLastInspection"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="12dp"
-            android:backgroundTint="#FFFDF0"
-            android:text="Select inspection date"
-            android:textColor="#888888" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/merienda_one"
             android:text="Status"
-            android:textColor="#555555"
-            android:textSize="12sp" />
+            android:textSize="13sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="4dp" />
+
 
         <Spinner
             android:id="@+id/spinnerStatus"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/bg_spinner"
+            android:background="@drawable/inputdesign"
             android:paddingStart="12dp"
-            android:paddingEnd="12dp" />
+            android:layout_marginBottom="12dp" />
 
+        <!-- ── Dates ── -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expected Harvest Date"
+            android:textSize="13sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="4dp" />
+
+        <Button
+            android:id="@+id/btnHarvestDate"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Pick Date"
+            android:backgroundTint="#FFC300"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_semibold"
+            android:layout_marginBottom="12dp"
+            app:cornerRadius="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Inspection Date"
+            android:textSize="13sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="4dp" />
+
+        <Button
+            android:id="@+id/btnLastInspection"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Pick Date"
+            android:backgroundTint="#FFC300"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_semibold"
+            android:layout_marginBottom="20dp"
+            app:cornerRadius="12dp" />
+
+        <!-- Action Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="end">
 
             <Button
                 android:id="@+id/btnCancel"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_height="48dp"
                 android:text="Cancel"
-                android:textColor="#555555" />
+                android:backgroundTint="#E0E0E0"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_semibold"
+                android:layout_marginEnd="8dp"
+                app:cornerRadius="12dp" />
 
             <Button
                 android:id="@+id/btnAddHive"
-                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#FFC300"
-                android:fontFamily="@font/markazi_text"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
+                android:layout_height="48dp"
                 android:text="Add Hive"
-                android:textColor="#2D2D2D" />
+                android:backgroundTint="#D8B4FE"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_semibold"
+                app:cornerRadius="12dp" />
+
         </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

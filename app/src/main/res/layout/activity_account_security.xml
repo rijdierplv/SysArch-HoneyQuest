@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/accountSecurity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFC300"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Top Bar: Back + Title -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/img_10"
+            android:scaleType="centerCrop"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Account Security"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center" />
+
+        <!-- Invisible spacer to center the title -->
+        <View
+            android:layout_width="36dp"
+            android:layout_height="36dp" />
+
+    </LinearLayout>
+
+    <!-- Change Password Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Current Password Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Password"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Current Password Input Row -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/inputdesign"
+        android:layout_marginBottom="16dp">
+
+        <EditText
+            android:id="@+id/currentPasswordInput"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="52dp"
+            android:hint="Enter current password"
+            android:textColor="@color/black"
+            android:textColorHint="#888888"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:background="@null"
+            android:inputType="textPassword" />
+
+        <ImageButton
+            android:id="@+id/toggleCurrentPassBtn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/eye_closed"
+            android:contentDescription="Toggle visibility" />
+
+    </FrameLayout>
+
+    <!-- New Password Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Password"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_marginBottom="4dp" />
+
+    <!-- New Password Input Row -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/inputdesign"
+        android:layout_marginBottom="16dp">
+
+        <EditText
+            android:id="@+id/newPasswordInput"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="52dp"
+            android:hint="Enter new password"
+            android:textColor="@color/black"
+            android:textColorHint="#888888"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:background="@null"
+            android:inputType="textPassword" />
+
+        <ImageButton
+            android:id="@+id/toggleNewPassBtn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/eye_closed"
+            android:contentDescription="Toggle visibility" />
+
+    </FrameLayout>
+
+    <!-- Confirm New Password Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm New Password"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Confirm Password Input Row -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/inputdesign"
+        android:layout_marginBottom="28dp">
+
+        <EditText
+            android:id="@+id/confirmNewPasswordInput"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="52dp"
+            android:hint="Confirm new password"
+            android:textColor="@color/black"
+            android:textColorHint="#888888"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:background="@null"
+            android:inputType="textPassword" />
+
+        <ImageButton
+            android:id="@+id/toggleConfirmPassBtn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/eye_closed"
+            android:contentDescription="Toggle visibility" />
+
+    </FrameLayout>
+
+    <!-- Change Password Button -->
+    <Button
+        android:id="@+id/changePasswordButton"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Change Password"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:backgroundTint="#D8B4FE"
+        android:stateListAnimator="@null"
+        app:cornerRadius="50dp" />
+
+</LinearLayout>

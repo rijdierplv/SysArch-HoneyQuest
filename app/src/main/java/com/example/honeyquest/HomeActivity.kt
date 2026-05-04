@@ -20,6 +20,7 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
         val hivesBtn = findViewById<ImageButton>(R.id.hivesBtn)
+        val profileBtn = findViewById<ImageButton>(R.id.profileButton)
         prof.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
             finish()
@@ -27,6 +28,10 @@ class HomeActivity : AppCompatActivity() {
 
         hivesBtn.setOnClickListener {
             startActivity(Intent(this, HiveManagement::class.java))
+            finish()
+        }
+        profileBtn.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
             finish()
         }
     }
