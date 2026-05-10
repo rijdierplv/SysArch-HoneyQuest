@@ -16,6 +16,9 @@
             android:name=".InspectionActivity"
             android:exported="false" />
         <activity
+            android:name=".HarvestLogsActivity"
+            android:exported="false" />
+        <activity
             android:name=".AccountSecurityActivity"
             android:exported="false" />
         <activity
