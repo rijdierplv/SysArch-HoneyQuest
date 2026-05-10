@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/hiveManagement"
+    android:id="@+id/inspection"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFC300"
-    tools:context=".HiveManagement">
+    android:background="#FFC300">
 
+    <!-- Header -->
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="38dp"
@@ -45,6 +45,7 @@
         app:layout_constraintTop_toBottomOf="@id/textView1"/>
 
     <ImageButton
+        android:id="@+id/notifBtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/notif"
@@ -53,6 +54,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"/>
 
+    <!-- Content Area -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/c1"
         android:layout_width="match_parent"
@@ -65,57 +67,31 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <TextView
-            android:id="@+id/hivesText"
+            android:id="@+id/inspectionTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="29dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/m_plus_1p_bold"
-            android:text="My Hives"
+            android:text="Inspection"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- EDIT 1: Added id + clickable to your existing +Add TextView -->
-        <TextView
-            android:id="@+id/btnAddHive"
-            android:layout_width="53dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="29dp"
-            android:background="@drawable/add_round"
-            android:clickable="true"
-            android:focusable="true"
-            android:fontFamily="@font/markazi_text"
-            android:gravity="center"
-            android:text="+Add"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/hivesText" />
-
-        <TextView
-            android:id="@+id/hivesNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/merienda_one"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="@id/hivesText"
-            app:layout_constraintTop_toBottomOf="@id/hivesText" />
-
 
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:paddingBottom="12dp"
             android:clipToPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/hivesNumber"
+            app:layout_constraintTop_toBottomOf="@id/inspectionTitle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="12dp">
 
             <LinearLayout
-                android:id="@+id/hiveContainer"
+                android:id="@+id/inspectionContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -127,6 +103,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Bottom Navigation -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="334dp"
@@ -137,9 +114,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/btnHome"
@@ -166,6 +141,7 @@
             android:padding="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/img_2"/>
+
         <ImageButton
             android:id="@+id/inspectionBtn"
             android:layout_width="35dp"

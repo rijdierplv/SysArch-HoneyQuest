@@ -25,24 +25,13 @@ class HiveManagement : AppCompatActivity() {
     private lateinit var hivesNumber: TextView
     private lateinit var hivesRef: DatabaseReference
 
-    private val hiveTypes     = listOf("Langstroth", "Top Bar", "Warre", "Flow Hive")
-    private val statusLabels  = listOf("Healthy", "Ready to Harvest", "Needs Inspection", "Overdue")
+    private val hiveTypes      = listOf("Langstroth", "Top Bar", "Warre", "Flow Hive")
+    private val statusLabels   = listOf("Healthy", "Ready to Harvest", "Needs Inspection", "Overdue")
     private val harvestMethods = listOf("Bucket", "Tank", "Drum", "Direct Jar")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hive_management)
-
-        val homeBtn = findViewById<ImageButton>(R.id.btnHome)
-        val profileBtn = findViewById<ImageButton>(R.id.profileButton)
-        profileBtn.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
-            finish()
-        }
-        homeBtn.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
-            finish()
-        }
 
         hiveContainer = findViewById(R.id.hiveContainer)
         hivesNumber   = findViewById(R.id.hivesNumber)
@@ -63,16 +52,7 @@ class HiveManagement : AppCompatActivity() {
             showHiveBottomSheet()
         }
 
-        // Bottom nav
-        findViewById<ImageButton>(R.id.btnHome).setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
-            finish()
-        }
-        findViewById<ImageButton>(R.id.profileButton).setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
-            finish()
-        }
-
+        setupBottomNav()
         loadHives()
     }
 
@@ -126,13 +106,8 @@ class HiveManagement : AppCompatActivity() {
         val btnSave           = sheetView.findViewById<Button>(R.id.btnAddHive)
         val btnCancel         = sheetView.findViewById<Button>(R.id.btnCancel)
 
-        // Read-only fields layout wrappers (to show lock hint)
-        val layoutCode        = sheetView.findViewById<TextInputLayout>(R.id.layoutHiveCode)
-        val layoutType        = sheetView.findViewById<View>(R.id.labelHiveType)
-
-        // Spinners
-        spinnerType.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, hiveTypes)
-        spinnerStatus.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, statusLabels)
+        spinnerType.adapter    = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, hiveTypes)
+        spinnerStatus.adapter  = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, statusLabels)
         spinnerHarvest.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, harvestMethods)
 
         val sdf = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
@@ -144,16 +119,14 @@ class HiveManagement : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, st: Int, c: Int, a: Int) {}
             override fun onTextChanged(s: CharSequence?, st: Int, b: Int, c: Int) {}
             override fun afterTextChanged(s: android.text.Editable?) {
-                val frames    = etFrameCount.text.toString().toIntOrNull() ?: 0
-                val perFrame  = etHoneyPerFrame.text.toString().toDoubleOrNull() ?: 0.0
-                val total     = frames * perFrame
-                val method    = spinnerHarvest.selectedItem?.toString() ?: "Bucket"
+                val frames   = etFrameCount.text.toString().toIntOrNull() ?: 0
+                val perFrame = etHoneyPerFrame.text.toString().toDoubleOrNull() ?: 0.0
+                val total    = frames * perFrame
+                val method   = spinnerHarvest.selectedItem?.toString() ?: "Bucket"
                 tvHoneyCalc.text = if (frames > 0 && perFrame > 0.0) {
                     "🍯 Estimated Honey: $frames frames × ${"%.2f".format(perFrame)} kg = " +
                             "${"%.2f".format(total)} kg  |  Method: $method"
-                } else {
-                    ""
-                }
+                } else { "" }
             }
         }
         etFrameCount.addTextChangedListener(calcWatcher)
@@ -167,14 +140,11 @@ class HiveManagement : AppCompatActivity() {
 
         // ── Mode: Add vs Edit ─────────────────────────────────────────────────
         if (existingHive == null) {
-            // ADD mode — all fields editable
             tvDialogTitle.text = "Add New Hive"
             btnSave.text       = "Add Hive"
             etCode.isEnabled   = true
             spinnerType.isEnabled = true
-
         } else {
-            // EDIT mode — hiveId/code/type are READ-ONLY
             tvDialogTitle.text = "Edit Hive"
             btnSave.text       = "Update Hive"
 
@@ -188,7 +158,6 @@ class HiveManagement : AppCompatActivity() {
             setSpinnerSelection(spinnerStatus, statusLabels, existingHive.status)
             setSpinnerSelection(spinnerHarvest, harvestMethods, existingHive.harvestMethod ?: "Bucket")
 
-            // Make hive code and type read-only on edit
             etCode.isEnabled      = false
             etCode.alpha          = 0.5f
             spinnerType.isEnabled = false
@@ -268,23 +237,15 @@ class HiveManagement : AppCompatActivity() {
         frameCount: Int, honeyPerFrame: Double, harvestMethod: String,
         dialog: BottomSheetDialog
     ) {
-        val hiveId = hivesRef.push().key
-        if (hiveId == null) {
+        val hiveId = hivesRef.push().key ?: run {
             Toast.makeText(this, "Failed to generate hive ID", Toast.LENGTH_SHORT).show()
             return
         }
 
         val hive = HivesModel(
-            hiveId        = hiveId,
-            name          = name,
-            code          = code,
-            hiveType      = hiveType,
-            location      = location,
-            harvestDate   = harvestDate,
-            inspectionDate = inspectionDate,
-            status        = status,
-            frameCount    = frameCount,
-            honeyPerFrame = honeyPerFrame,
+            hiveId = hiveId, name = name, code = code, hiveType = hiveType,
+            location = location, harvestDate = harvestDate, inspectionDate = inspectionDate,
+            status = status, frameCount = frameCount, honeyPerFrame = honeyPerFrame,
             harvestMethod = harvestMethod
         )
 
@@ -306,16 +267,9 @@ class HiveManagement : AppCompatActivity() {
         dialog: BottomSheetDialog
     ) {
         val updatedHive = HivesModel(
-            hiveId        = hiveId,
-            name          = name,
-            code          = code,
-            hiveType      = hiveType,
-            location      = location,
-            harvestDate   = harvestDate,
-            inspectionDate = inspectionDate,
-            status        = status,
-            frameCount    = frameCount,
-            honeyPerFrame = honeyPerFrame,
+            hiveId = hiveId, name = name, code = code, hiveType = hiveType,
+            location = location, harvestDate = harvestDate, inspectionDate = inspectionDate,
+            status = status, frameCount = frameCount, honeyPerFrame = honeyPerFrame,
             harvestMethod = harvestMethod
         )
 
@@ -329,7 +283,7 @@ class HiveManagement : AppCompatActivity() {
             }
     }
 
-    // ── Delete — blocked if hive has frames ───────────────────────────────────
+    // ── Delete ────────────────────────────────────────────────────────────────
     private fun confirmDeleteHive(hive: HivesModel) {
         val hiveId = hive.hiveId
         if (hiveId.isNullOrEmpty()) {
@@ -392,10 +346,8 @@ class HiveManagement : AppCompatActivity() {
         harvestDate.text    = hive.harvestDate ?: "Not set"
         inspectionDate.text = hive.inspectionDate ?: "Not set"
 
-        // Frames
         tvFrames.text = "🪟 Frames: ${hive.frameCount}"
 
-        // Honey production calculation
         val total = hive.frameCount * hive.honeyPerFrame
         tvHoneyInfo.text = if (hive.frameCount > 0 && hive.honeyPerFrame > 0.0) {
             "🍯 ${hive.frameCount} × ${"%.2f".format(hive.honeyPerFrame)} kg = " +
@@ -434,6 +386,29 @@ class HiveManagement : AppCompatActivity() {
             "Needs Inspection"  -> ContextCompat.getColor(this, R.color.status_inspection)
             "Overdue"           -> ContextCompat.getColor(this, R.color.status_overdue)
             else                -> ContextCompat.getColor(this, R.color.status_healthy)
+        }
+    }
+
+    // ── Bottom Navigation ─────────────────────────────────────────────────────
+    private fun setupBottomNav() {
+        findViewById<ImageButton>(R.id.btnHome).setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }
+        findViewById<ImageButton>(R.id.hivesBtn).setOnClickListener {
+            // Already on Hives
+        }
+        findViewById<ImageButton>(R.id.inspectionBtn).setOnClickListener {
+            startActivity(Intent(this, InspectionActivity::class.java))
+            finish()
+        }
+        findViewById<ImageButton>(R.id.harvestLogsBtn).setOnClickListener {
+            startActivity(Intent(this, HarvestLogsActivity::class.java))
+            finish()
+        }
+        findViewById<ImageButton>(R.id.profileButton).setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+            finish()
         }
     }
 }
