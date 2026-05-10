@@ -208,14 +208,14 @@
             android:src="@drawable/img_3" />
 
         <ImageButton
-            android:id="@+id/reportBtn"
+            android:id="@+id/harvestLogsBtn"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:adjustViewBounds="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Reports"
+            android:contentDescription="Harvest Logs"
             android:padding="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/img_4" />
